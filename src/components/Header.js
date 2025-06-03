@@ -12,7 +12,7 @@ export default function Header() {
       <div className={styles.headerContent}>
         <div className={styles.logo}>
           <Link href="/">
-            <h1>地理院地図</h1>
+            <h1>react練習用ページ</h1>
           </Link>
         </div>
         <nav className={styles.nav}>
@@ -20,17 +20,17 @@ export default function Header() {
             <Link href="/" className={pathname === '/' ? styles.active : ''}>
               ホーム
             </Link>
-            <Link href="/usage" className={pathname === '/usage' ? styles.active : ''}>
-              使い方
+            <Link href="/article" className={pathname === '/usage' ? styles.active : ''}>
+              記事
             </Link>
-            <Link href="/news" className={pathname === '/news' ? styles.active : ''}>
+            {/* <Link href="/news" className={pathname === '/news' ? styles.active : ''}>
               お知らせ
-            </Link>
+            </Link> */}
           </div>
-          <div className={styles.language}>
+          {/* <div className={styles.language}>
             <button className={styles.active}>JP</button>
             <button>EN</button>
-          </div>
+          </div> */}
         </nav>
       </div>
     </header>

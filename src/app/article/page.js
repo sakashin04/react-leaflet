@@ -9,54 +9,49 @@ export default function Article() {
       <article className={styles.article}>
         <header className={styles.articleHeader}>
           <h1 className={styles.title}>
-            View Transitions API入門 - 連続性のある画面遷移アニメーションを実現するウェブの新技術
+          reactをnextjsでデプロイする
           </h1>
           <p className={styles.subtitle}>
-            シンプルでスムーズな連続性のあるアニメーションを実装できます
+            コマンドプロンプトよりUI使う方が楽にデプロイできる
           </p>
           <div className={styles.meta}>
-            <span>3月24日</span>
+            <span>6月3日</span>
             <span className={styles.divider}></span>
-            <span>メンテナンス済み</span>
+            <span>編集中</span>
             <span className={styles.divider}></span>
             <span>--</span>
-            <span className={styles.tag}>CSS</span>
+            <span className={styles.tag}>react</span>
+            <span className={styles.tag}>nextjs</span>
           </div>
         </header>
 
         <div className={styles.content}>
           <p>
-            View Transitions APIを使うと、シンプルでスムーズな連続性のあるアニメーションを実装できます。
+            nextjsはreactのフレームワークです。
           </p>
 
           <p>
-            ウェブ技術でのアニメーションはさまざまな手段が存在します。CSSの transition や 
-            animation 、JavaScriptでのWeb Animations APIなど利用されている方も多いでしょう。View 
-            Transitions APIは、これらのアニメーション手段だけでは実現が困難だった新しい遷移アニメーションを実現できます。
+          Reactは、WebサイトやWebアプリのUI（ユーザーインターフェース）を構築するために使用されるJavaScriptライブラリです。コンポーネントベースのアーキテクチャを採用しており、小さな部品（コンポーネント）を組み合わせて複雑なUIを構築できるため、高い再利用性と保守性を誇ります。﻿
           </p>
 
-          <h2>本記事で紹介すること</h2>
-          <p>
-            本記事では「どのようなことができるか」「使い方」「使用上の注意点」を紹介します。
-          </p>
+          <h2 id="nextjsのメリット">nextjsのメリット</h2>
+          <p>メリットは以下の通りです。</p>
+          <ul>
+            <li>パフォーマンスが向上する</li>
+          </ul>
 
-          <h2>View Transitions APIで実現できるのは新しい遷移アニメーション</h2>
-          <p>
-            JavaScriptとCSSの指定で容易に利用できます。
-            JSフレームワークでの対応も進んでいます。
-          </p>
+          <h2 id="nextjsのデメリット">nextjsのデメリット</h2>
+          <p>デメリットは以下の通りです。</p>
+          <ul>
+            <li>buildに時間がかかる</li>
+          </ul>
         </div>
 
         <aside className={styles.tableOfContents}>
           <h3>目次</h3>
           <ul className={styles.tocList}>
-            <li><a href="#what-is-vta">View Transitions APIで何ができるか？</a></li>
-            <li><a href="#multiple-pages">複数ページの遷移</a></li>
-            <li><a href="#modal">モーダル表示</a></li>
-            <li><a href="#slideshow">スライドショー</a></li>
-            <li><a href="#ui">UI要素の演出</a></li>
-            <li><a href="#sound">サウンドメディアの切り替え</a></li>
-            <li><a href="#how-to-use">View Transitions APIの使い方</a></li>
+            <li><a href="#nextjsのメリット">nextjsのメリット</a></li>
+            <li><a href="#nextjsのデメリット">nextjsのデメリット</a></li>
           </ul>
         </aside>
       </article>

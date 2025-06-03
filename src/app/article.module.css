@@ -71,6 +71,11 @@
   color: var(--accent-neon-blue-hover);
 }
 
+.content ul {
+  padding-left: 2em;
+  margin-bottom: 1.5rem;
+}
+
 .tableOfContents {
   position: fixed;
   top: 100px;
