@@ -2,23 +2,42 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding-top: 56px;
 }
 
 .header {
   background-color: #fff;
   border-bottom: 1px solid #e5e5e5;
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1000;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.95);
 }
 
 .headerContent {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 0 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.logo {
+  position: relative;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
 }
 
 .logo h1 {
@@ -29,21 +48,36 @@
 
 .nav {
   display: flex;
-  gap: 2rem;
   align-items: center;
+  gap: 2rem;
 }
 
-.nav a {
-  color: #333;
+.navLinks {
+  display: flex;
+  border-bottom: 2px solid transparent;
+}
+
+.navLinks a {
+  color: #666;
   text-decoration: none;
   font-size: 0.9rem;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.3s;
+  padding: 1rem 1rem;
+  position: relative;
+  font-weight: 500;
 }
 
-.nav a:hover {
-  background-color: #f5f5f5;
+.navLinks a.active {
+  color: #000;
+}
+
+.navLinks a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #000;
 }
 
 .language {
@@ -300,6 +334,7 @@
   border: 1px solid #e5e5e5;
   border-radius: 8px;
   overflow: hidden;
+  position: relative;
 }
 
 .map h2 {
@@ -311,6 +346,60 @@
 .mapContainer {
   height: 500px;
   width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.expandButton {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background: white;
+  border: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.expandButton:hover {
+  transform: scale(1.1);
+  background: #f5f5f5;
+}
+
+.expandIcon {
+  width: 1.2rem;
+  height: 1.2rem;
+  position: relative;
+}
+
+.expandIcon::before,
+.expandIcon::after {
+  content: '';
+  position: absolute;
+  background: #333;
+}
+
+.expandIcon::before {
+  width: 100%;
+  height: 2px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.expandIcon::after {
+  width: 2px;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
 }
 
 .mapLoading {

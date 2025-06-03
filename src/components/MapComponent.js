@@ -1,38 +1,47 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
-import L from 'leaflet';
+import styles from './MapComponent.module.css';
+import 'leaflet/dist/leaflet.css';
 
-// Leafletのデフォルトアイコンの設定を修正
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-});
+export default function MapComponent({ onExpand, isExpanded = false }) {
+  const [isMounted, setIsMounted] = useState(false);
 
-export default function MapComponent() {
   useEffect(() => {
-    // Leafletのスタイルをクライアントサイドでのみ読み込む
-    import('leaflet/dist/leaflet.css');
+    setIsMounted(true);
   }, []);
 
-  // 東京の座標
-  const position = [35.6812, 139.7671];
+  if (!isMounted) {
+    return (
+      <div className={styles.mapWrapper}>
+        <div className={styles.loadingContainer}>
+          <p>地図を読み込み中...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <MapContainer
-      center={position}
-      zoom={13}
-      scrollWheelZoom={true}
-      style={{ height: "100%", width: "100%" }}
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://maps.gsi.go.jp/development/ichiran.html">地理院タイル</a>'
-        url="https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png"
-        maxZoom={18}
-      />
-    </MapContainer>
+    <div className={styles.mapWrapper}>
+      <MapContainer
+        center={[35.6895, 139.6917]}
+        zoom={13}
+        style={{ height: '100%', width: '100%' }}
+        zoomControl={true}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://maps.gsi.go.jp/development/ichiran.html">国土地理院</a>'
+          url="https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png"
+        />
+      </MapContainer>
+      <button 
+        className={`${styles.expandButton} ${isExpanded ? styles.minimizeButton : ''}`}
+        onClick={onExpand}
+        aria-label={isExpanded ? "地図を縮小表示" : "地図を拡大表示"}
+      >
+        <span className={`${styles.expandIcon} ${isExpanded ? styles.minimizeIcon : ''}`} />
+      </button>
+    </div>
   );
 } 

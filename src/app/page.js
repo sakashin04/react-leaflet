@@ -3,6 +3,13 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import dynamic from "next/dynamic";
+import { useState } from 'react';
+
+// MapModalコンポーネントを動的にインポート
+const MapModal = dynamic(
+  () => import('../components/MapModal'),
+  { ssr: false }
+);
 
 // MapComponentを動的にインポート
 const MapComponent = dynamic(
@@ -18,20 +25,24 @@ const MapComponent = dynamic(
 );
 
 export default function Home() {
+  const [isMapModalOpen, setIsMapModalOpen] = useState(false);
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.headerContent}>
           <div className={styles.logo}>
-            <h1>React Leaflet</h1>
+            <h1>地理院地図</h1>
           </div>
           <nav className={styles.nav}>
-            <a href="#general">一般の方</a>
-            <a href="#business">行政・事業者の方</a>
-            <a href="#press">プレスルーム</a>
+            <div className={styles.navLinks}>
+              <a href="#" className={styles.active}>ホーム</a>
+              <a href="#">使い方</a>
+              <a href="#">お知らせ</a>
+            </div>
             <div className={styles.language}>
-              <span className={styles.active}>日本語</span>
-              <span>English</span>
+              <span className={styles.active}>JP</span>
+              <span>EN</span>
             </div>
           </nav>
         </div>
@@ -48,7 +59,7 @@ export default function Home() {
 
         <section className={styles.map}>
           <div className={styles.mapContainer}>
-            <MapComponent />
+            <MapComponent onExpand={() => setIsMapModalOpen(true)} />
           </div>
         </section>
 
@@ -168,6 +179,11 @@ export default function Home() {
           <p>&copy; 2024 React Leaflet. All rights reserved.</p>
         </div>
       </footer>
+
+      <MapModal 
+        isOpen={isMapModalOpen}
+        onClose={() => setIsMapModalOpen(false)}
+      />
     </div>
   );
 }

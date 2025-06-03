@@ -1,0 +1,86 @@
+.mapWrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.loadingContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.loadingContainer p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.expandButton {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background: white;
+  border: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.expandButton:hover {
+  transform: scale(1.1);
+  background: #f5f5f5;
+}
+
+.expandIcon {
+  width: 1.2rem;
+  height: 1.2rem;
+  position: relative;
+}
+
+.expandIcon::before,
+.expandIcon::after {
+  content: '';
+  position: absolute;
+  background: #333;
+  transition: transform 0.2s ease;
+}
+
+.expandIcon::before {
+  width: 100%;
+  height: 2px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.expandIcon::after {
+  width: 2px;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+/* 縮小ボタンのスタイル */
+.minimizeIcon::after {
+  transform: translateX(-50%) scaleY(0);
+}
+
+.minimizeButton {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.minimizeButton:hover {
+  background: rgba(245, 245, 245, 0.9);
+} 
