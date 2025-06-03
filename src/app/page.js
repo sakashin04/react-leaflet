@@ -1,5 +1,21 @@
+'use client';
+
 import Image from "next/image";
 import styles from "./page.module.css";
+import dynamic from "next/dynamic";
+
+// MapComponentを動的にインポート
+const MapComponent = dynamic(
+  () => import("../components/MapComponent"),
+  { 
+    loading: () => (
+      <div className={styles.mapLoading}>
+        <p>地図を読み込み中...</p>
+      </div>
+    ),
+    ssr: false
+  }
+);
 
 export default function Home() {
   return (
@@ -28,6 +44,12 @@ export default function Home() {
             <li>React Leafletの最新バージョンがリリースされました</li>
             <li>セキュリティアップデートのお知らせ</li>
           </ul>
+        </section>
+
+        <section className={styles.map}>
+          <div className={styles.mapContainer}>
+            <MapComponent />
+          </div>
         </section>
 
         <section className={styles.topics}>
