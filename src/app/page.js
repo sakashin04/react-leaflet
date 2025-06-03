@@ -32,7 +32,7 @@ export default function Home() {
       <header className={styles.header}>
         <div className={styles.headerContent}>
           <div className={styles.logo}>
-            <h1>地理院地図</h1>
+            <h1>react練習用ページ</h1>
           </div>
           <nav className={styles.nav}>
             <div className={styles.navLinks}>
@@ -49,59 +49,48 @@ export default function Home() {
       </header>
 
       <main className={styles.main}>
-        <section className={styles.important}>
-          <h2>重要なお知らせ</h2>
-          <ul>
-            <li>React Leafletの最新バージョンがリリースされました</li>
-            <li>セキュリティアップデートのお知らせ</li>
-          </ul>
-        </section>
-
         <section className={styles.map}>
           <div className={styles.mapContainer}>
             <MapComponent onExpand={() => setIsMapModalOpen(true)} />
           </div>
         </section>
 
-        <section className={styles.topics}>
-          <h2>トピックス</h2>
-          <div className={styles.topicsGrid}>
-            <div className={styles.topicCard}>
-              <div className={styles.topicImage}>
+        <section className={styles.fixedArticles}>
+          <h2>固定記事</h2>
+          <div className={styles.fixedArticlesGrid}>
+            <div className={styles.fixedArticleCard}>
+              <div className={styles.fixedArticleImage}>
                 <Image
                   src="/map-placeholder.jpg"
                   alt="地図の例"
                   width={300}
                   height={200}
-                  layout="responsive"
                 />
               </div>
-              <p>新機能：カスタムマーカー機能が追加されました</p>
+              <p>leafletをreactに導入する方法</p>
             </div>
-            <div className={styles.topicCard}>
-              <div className={styles.topicImage}>
+            {/* <div className={styles.fixedArticleCard}>
+              <div className={styles.fixedArticleImage}>
                 <Image
                   src="/map-placeholder.jpg"
                   alt="地図の例"
                   width={300}
                   height={200}
-                  layout="responsive"
                 />
               </div>
               <p>地図データの更新：最新の地理情報に対応</p>
             </div>
-            <div className={styles.topicCard}>
-              <div className={styles.topicImage}>
+            <div className={styles.fixedArticleCard}>
+              <div className={styles.fixedArticleImage}>
                 <Image
                   src="/map-placeholder.jpg"
                   alt="地図の例"
                   width={300}
                   height={200}
-                  layout="responsive"
                 />
               </div>
               <p>パフォーマンス改善：描画速度が50%向上</p>
-            </div>
+            </div> */}
           </div>
         </section>
 
@@ -110,11 +99,11 @@ export default function Home() {
             <h2>新着・更新</h2>
             <div className={styles.newsList}>
               <a href="#" className={styles.newsItem}>
-                <span className={styles.newsDate}>2024年6月3日</span>
+                <span className={styles.newsDate}>2025年6月3日</span>
                 <span className={styles.newsTag}>リリース</span>
-                <span className={styles.newsTitle}>バージョン4.0.0をリリースしました</span>
+                <span className={styles.newsTitle}>バージョン0.0.1をリリースしました</span>
               </a>
-              <a href="#" className={styles.newsItem}>
+              {/* <a href="#" className={styles.newsItem}>
                 <span className={styles.newsDate}>2024年6月2日</span>
                 <span className={styles.newsTag}>お知らせ</span>
                 <span className={styles.newsTitle}>ドキュメントを更新しました</span>
@@ -123,13 +112,13 @@ export default function Home() {
                 <span className={styles.newsDate}>2024年6月1日</span>
                 <span className={styles.newsTag}>メンテナンス</span>
                 <span className={styles.newsTitle}>定期メンテナンスのお知らせ</span>
-              </a>
+              </a> */}
             </div>
-            <a href="#" className={styles.moreLink}>一覧を見る</a>
+            {/* <a href="#" className={styles.moreLink}>一覧を見る</a> */}
           </section>
 
           <section className={styles.serviceSection}>
-            <h2>サービス</h2>
+            <h2>サービス（全て作成予定で何も着手していません）</h2>
             <div className={styles.serviceGrid}>
               <a href="#" className={styles.serviceCard}>
                 <h3>マップエディタ</h3>
@@ -138,10 +127,6 @@ export default function Home() {
               <a href="#" className={styles.serviceCard}>
                 <h3>データポータル</h3>
                 <p>地理データの検索・ダウンロードができます。</p>
-              </a>
-              <a href="#" className={styles.serviceCard}>
-                <h3>API管理</h3>
-                <p>APIキーの発行・管理ができます。</p>
               </a>
             </div>
           </section>
@@ -176,7 +161,7 @@ export default function Home() {
           </div>
         </div>
         <div className={styles.footerBottom}>
-          <p>&copy; 2024 React Leaflet. All rights reserved.</p>
+          <p>&copy; 2025 普及課NW係 All rights reserved.</p>
         </div>
       </footer>
 

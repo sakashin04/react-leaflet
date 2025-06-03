@@ -3,11 +3,13 @@
   display: flex;
   flex-direction: column;
   padding-top: 56px;
+  background-color: var(--background-dark);
+  color: var(--text-primary);
 }
 
 .header {
-  background-color: #fff;
-  border-bottom: 1px solid #e5e5e5;
+  background-color: rgba(26, 26, 26, 0.95);
+  border-bottom: 1px solid var(--border-color);
   position: fixed;
   top: 0;
   left: 0;
@@ -18,7 +20,6 @@
   align-items: center;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  background-color: rgba(255, 255, 255, 0.95);
 }
 
 .headerContent {
@@ -35,15 +36,12 @@
 .logo {
   position: relative;
   z-index: 2;
-  background-color: rgba(255, 255, 255, 0.95);
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
 }
 
 .logo h1 {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #000;
+  color: var(--text-primary);
 }
 
 .nav {
@@ -58,16 +56,21 @@
 }
 
 .navLinks a {
-  color: #666;
+  color: var(--text-secondary);
   text-decoration: none;
   font-size: 0.9rem;
   padding: 1rem 1rem;
   position: relative;
   font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navLinks a:hover {
+  color: var(--accent-purple);
 }
 
 .navLinks a.active {
-  color: #000;
+  color: var(--accent-neon-blue);
 }
 
 .navLinks a.active::after {
@@ -77,7 +80,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #000;
+  background-color: var(--accent-neon-blue);
 }
 
 .language {
@@ -85,18 +88,22 @@
   gap: 1rem;
   margin-left: 2rem;
   padding-left: 2rem;
-  border-left: 1px solid #e5e5e5;
+  border-left: 1px solid var(--border-color);
 }
 
 .language span {
   cursor: pointer;
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.language span:hover {
+  color: var(--accent-purple);
 }
 
 .language span.active {
-  color: #000;
-  font-weight: 500;
+  color: var(--text-primary);
 }
 
 .main {
@@ -106,75 +113,50 @@
   padding: 2rem 1rem;
 }
 
-.important {
-  background-color: #fff;
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.important h2 {
-  font-size: 1.2rem;
-  color: #000;
-  margin-bottom: 1rem;
-}
-
-.important ul {
-  list-style: none;
-}
-
-.important li {
-  position: relative;
-  padding-left: 1.5rem;
-  margin-bottom: 0.5rem;
-  color: #333;
-}
-
-.important li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: #0070f3;
-}
-
-.topics {
+.fixedArticles {
   margin-bottom: 3rem;
 }
 
-.topics h2 {
+.fixedArticles h2 {
   font-size: 1.2rem;
-  color: #000;
+  color: var(--text-primary);
   margin-bottom: 1.5rem;
 }
 
-.topicsGrid {
+.fixedArticlesGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
 }
 
-.topicCard {
-  background: #fff;
-  border: 1px solid #e5e5e5;
+.fixedArticleCard {
+  background: var(--background-card);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   overflow: hidden;
-  transition: transform 0.3s;
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.topicCard:hover {
+.fixedArticleCard:hover {
   transform: translateY(-2px);
+  border-color: var(--accent-purple);
 }
 
-.topicImage {
+.fixedArticleImage {
   position: relative;
   height: 200px;
 }
 
-.topicCard p {
+.fixedArticleImage img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.fixedArticleCard p {
   padding: 1rem;
   font-size: 0.9rem;
-  color: #333;
+  color: var(--text-secondary);
 }
 
 .contentGrid {
@@ -186,7 +168,7 @@
 .newsSection h2,
 .serviceSection h2 {
   font-size: 1.2rem;
-  color: #000;
+  color: var(--text-primary);
   margin-bottom: 1.5rem;
 }
 
@@ -202,31 +184,31 @@
   gap: 1rem;
   align-items: center;
   padding: 1rem;
-  background: #fff;
-  border: 1px solid #e5e5e5;
+  background: var(--background-card);
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   transition: background-color 0.3s;
 }
 
 .newsItem:hover {
-  background-color: #f5f5f5;
+  background-color: var(--background-dark);
 }
 
 .newsDate {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
 .newsTag {
-  background: #e5e5e5;
-  color: #333;
+  background: var(--background-card);
+  color: var(--text-primary);
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
   font-size: 0.8rem;
 }
 
 .newsTitle {
-  color: #333;
+  color: var(--text-primary);
 }
 
 .moreLink {
@@ -243,32 +225,33 @@
 }
 
 .serviceCard {
-  background: #fff;
-  border: 1px solid #e5e5e5;
+  background: var(--background-card);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 1.5rem;
   transition: background-color 0.3s;
 }
 
 .serviceCard:hover {
-  background-color: #f5f5f5;
+  background-color: var(--background-dark);
 }
 
 .serviceCard h3 {
-  color: #000;
+  color: var(--text-primary);
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
 }
 
 .serviceCard p {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
 .footer {
-  background-color: #f5f5f5;
+  background-color: var(--background-card);
   padding: 4rem 1rem 2rem;
   margin-top: 4rem;
+  border-top: 1px solid var(--border-color);
 }
 
 .footerContent {
@@ -283,12 +266,12 @@
 }
 
 .footerSection h3 {
-  color: #000;
+  color: var(--text-primary);
   margin-bottom: 1rem;
 }
 
 .footerSection p {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
@@ -300,31 +283,31 @@
 }
 
 .footerColumn h4 {
-  color: #000;
+  color: var(--text-primary);
   margin-bottom: 1rem;
   font-size: 1rem;
 }
 
 .footerColumn a {
   display: block;
-  color: #666;
+  color: var(--text-secondary);
   text-decoration: none;
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
-  transition: color 0.3s;
+  transition: color 0.3s ease;
 }
 
 .footerColumn a:hover {
-  color: #0070f3;
+  color: var(--accent-purple);
 }
 
 .footerBottom {
   max-width: 1200px;
   margin: 2rem auto 0;
   padding-top: 2rem;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid var(--border-color);
   text-align: center;
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
@@ -433,4 +416,26 @@
   .footerLinks {
     grid-template-columns: 1fr;
   }
+}
+
+.active {
+  color: var(--accent-neon-blue);
+  font-weight: bold;
+}
+
+.button {
+  background-color: var(--accent-neon-blue);
+  color: white;
+}
+
+.link {
+  color: var(--accent-neon-blue);
+}
+
+.mapControls button.active {
+  border-color: var(--accent-neon-blue);
+}
+
+.searchResult:hover {
+  color: var(--accent-neon-blue);
 }

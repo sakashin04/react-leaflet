@@ -6,6 +6,13 @@
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
   --font-sans: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
     "Hiragino Sans", Meiryo, sans-serif;
+  --background-dark: #1a1a1a;
+  --background-card: #242424;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --accent-neon-blue: #7DF9FF;
+  --accent-neon-blue-hover: #5CE1E6;
+  --border-color: #333333;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,13 +26,13 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  background-color: var(--background-dark);
+  color: var(--text-primary);
   font-family: var(--font-sans);
   line-height: 1.6;
 }
 
 body {
-  color: #333;
-  background: #fff;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
