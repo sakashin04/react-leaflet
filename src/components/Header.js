@@ -11,27 +11,25 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.headerContent}>
         <div className={styles.logo}>
-          <Link href="/">
-            <h1>react練習用ページ</h1>
+          <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
+            <h1>練習用ページ</h1>
           </Link>
         </div>
-        <nav className={styles.nav}>
-          <div className={styles.navLinks}>
-            <Link href="/" className={pathname === '/' ? styles.active : ''}>
-              ホーム
-            </Link>
-            <Link href="/article" className={pathname === '/usage' ? styles.active : ''}>
-              記事
-            </Link>
-            {/* <Link href="/news" className={pathname === '/news' ? styles.active : ''}>
-              お知らせ
-            </Link> */}
-          </div>
-          {/* <div className={styles.language}>
-            <button className={styles.active}>JP</button>
-            <button>EN</button>
-          </div> */}
+        <nav className={styles.navLinks}>
+          <Link href="/">
+            地図
+          </Link>
+          <Link href="/#fixed-articles">
+            記事
+          </Link>
+          {/* <Link href="/news" className={pathname === '/news' ? styles.active : ''}>
+            お知らせ
+          </Link> */}
         </nav>
+        {/* <div className={styles.language}>
+          <button className={styles.active}>JP</button>
+          <button>EN</button>
+        </div> */}
       </div>
     </header>
   );

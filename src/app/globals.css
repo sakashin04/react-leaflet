@@ -1,18 +1,132 @@
+/*
+html5doctor.com Reset Stylesheet
+v1.6.1
+Last Updated: 2010-09-17
+Author: Richard Clark - http://richclarkdesign.com
+Twitter: @rich_clark
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap');
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin:0;
+  padding:0;
+  border:0;
+  outline:0;
+  font-size:100%;
+  vertical-align:baseline;
+  background:transparent;
+}
+
+body {
+  line-height:1;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+  display:block;
+}
+
+nav ul {
+  list-style:none;
+}
+
+blockquote, q {
+  quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content:'';
+  content:none;
+}
+
+a {
+  margin:0;
+  padding:0;
+  font-size:100%;
+  vertical-align:baseline;
+  background:transparent;
+}
+
+/* change colours to suit your needs */
+ins {
+  background-color:#ff9;
+  color:#000;
+  text-decoration:none;
+}
+
+/* change colours to suit your needs */
+mark {
+  background-color:#ff9;
+  color:#000;
+  font-style:italic;
+   font-weight:bold;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+  border-bottom:1px dotted;
+  cursor:help;
+}
+
+table {
+  border-collapse:collapse;
+  border-spacing:0;
+}
+
+/* change border colour to suit your needs */
+hr {
+  display:block;
+  height:1px;
+  border:0;
+  border-top:1px solid #cccccc;
+  margin:1em 0;
+  padding:0;
+}
+
+input, select {
+  vertical-align:middle;
+}
+
 :root {
-  --max-width: 1200px;
+  --max-width: 900px;
   --border-radius: 8px;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
-  --font-sans: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
-    "Hiragino Sans", Meiryo, sans-serif;
+  --font-sans: "Arial",  "ヒラギノ角ゴ ProN", sans-serif;
+ 
   --background-dark: #1a1a1a;
   --background-card: #242424;
   --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
-  --accent-neon-blue: #7DF9FF;
-  --accent-neon-blue-hover: #5CE1E6;
-  --border-color: #333333;
+  --text-secondary: #e6e6e6;
+  --text-third: #3f5d7c;
+  --accent-neon-blue: #4b6bbb;
+  --accent-neon-blue-hover: #6adde1;
+  --border-color: rgba(255,255,255,0.2);
+  --text-color: #fff;
+  --background-color: #7f97b1;
+  --background-color2: #7f97b1;
+  /* --background-color: #3c454b; */
+  --background-bright-color: #4c5459;
+  --background-bright-hover-color: #535b61;
+  --white: #ffffff;
+  --black: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,6 +138,7 @@
 
 html,
 body {
+  scroll-padding-top: 20px;
   max-width: 100vw;
   overflow-x: hidden;
   background-color: var(--background-dark);
@@ -73,4 +188,37 @@ button {
 .leaflet-container {
   width: 100%;
   height: 100%;
+  background: transparent !important;
+}
+
+.leaflet-container img.leaflet-tile {
+  mix-blend-mode: normal !important;
+}
+
+.leaflet-tile-pane {
+  background: transparent !important;
+}
+
+.leaflet-tile-pane img.leaflet-tile[src*="std"] {
+  z-index: 100 !important;
+}
+
+body .leaflet-tile-pane img.leaflet-tile[src*="hillshademap"] {
+  z-index: 200 !important;
+  mix-blend-mode: multiply !important;
+  pointer-events: none;
+}
+
+.leaflet-layer {
+  position: absolute !important;
+}
+.leaflet-layer:has(img[src*="std"]) {
+  z-index: 100 !important;
+}
+.leaflet-layer:has(img[src*="hillshademap"]) {
+  z-index: 200 !important;
+}
+.leaflet-layer > img[src*="hillshademap"] {
+  mix-blend-mode: multiply !important;
+  pointer-events: none;
 }

@@ -2,70 +2,84 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding-top: 56px;
-  background-color: var(--background-dark);
-  color: var(--text-primary);
+  margin-left: 180px;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .header {
-  background-color: rgba(26, 26, 26, 0.95);
-  border-bottom: 1px solid var(--border-color);
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  z-index: 9999;
-  height: 56px;
+  height: 100vh;
+  width: 180px;
+  z-index: 1000;
   display: flex;
-  align-items: center;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  /* デザインはお好みで調整 */
+  background-color: var(--background-color);
+  border-right: 1px solid var(--white);
+  /* border-radius: 0 8px 8px 0; */
+  margin: 0;
+  padding: 2rem 1rem 2rem 1rem;
 }
 
 .headerContent {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  height: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  position: relative;
+}
+
+.headerSpacer {
+  display: none;
 }
 
 .logo {
-  position: relative;
-  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
 }
 
 .logo h1 {
-  font-size: 1.5rem;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 3rem;
   font-weight: bold;
-  color: var(--text-primary);
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+  color: var(--text-color);
+  margin: 0;
+  letter-spacing: 0.1em;
+  text-align: center;
+  font-family: 'Shippori Mincho', serif;
 }
 
 .navLinks {
   display: flex;
-  gap: 2rem;
+  gap: 2.5rem;
+  /* margin-left: 2rem; */
 }
 
 .navLinks a {
-  color: var(--text-secondary);
+  color: var(--text-color);
   text-decoration: none;
-  font-size: 0.9rem;
-  position: relative;
-  font-weight: 500;
-  transition: color 0.3s ease;
+  font-size: 1.5rem;
+  font-weight: 600;
+  transition: color 0.2s;
+  padding: 0.5rem 0.5rem;
+  font-family: 'Shippori Mincho', serif;
+  writing-mode: vertical-rl;
+  border-radius: 4px;
+  text-align: center;
 }
 
 .navLinks a:hover {
-  color: var(--accent-neon-blue);
+  background: var(--background-bright-hover-color);
 }
 
 .navLinks a.active {
@@ -106,14 +120,15 @@
 }
 
 .footer {
-  background-color: var(--background-card);
-  padding: 4rem 1rem 2rem;
-  margin-top: 4rem;
+  background-color: var(--background-bright-color);
+  color: var(--text-color);
   border-top: 1px solid var(--border-color);
+  margin-top: 2rem;
+  padding: 2rem 1rem 1rem;
 }
 
 .footerContent {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
   display: flex;
   gap: 4rem;
@@ -160,7 +175,7 @@
 }
 
 .footerBottom {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 2rem auto 0;
   padding-top: 2rem;
   border-top: 1px solid var(--border-color);
@@ -182,4 +197,42 @@
   .footerLinks {
     grid-template-columns: 1fr;
   }
+}
+
+.toc-header {
+  background: var(--header-bg, #222e3a); /* ヘッダーと同じ色に */
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 16px 24px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.toc-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc-list li {
+  margin-bottom: 8px;
+}
+
+.toc-list a {
+  color: #7ee0ff; /* アクセントカラー */
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.toc-list a:hover {
+  color: #fff;
 } 

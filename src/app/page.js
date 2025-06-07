@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import dynamic from "next/dynamic";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import Link from 'next/link';
 
@@ -28,11 +28,34 @@ const MapComponent = dynamic(
 
 export default function Home() {
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [map, setMap] = useState(null);
+
+  useEffect(() => {
+    if (!visible) return;
+    const timer = setTimeout(() => {
+      const container = document.querySelectorAll('.leaflet-tile-pane img');
+      container.forEach(img => {
+        if (img.src.includes('/shade/')) {
+          img.style.mixBlendMode = 'multiply';
+        }
+      });
+    }, 300); // 300ms遅延
+    return () => {
+      clearTimeout(timer);
+      const container = document.querySelectorAll('.leaflet-tile-pane img');
+      container.forEach(img => {
+        if (img.src.includes('/shade/')) {
+          img.style.mixBlendMode = '';
+        }
+      });
+    };
+  }, [visible, map]);
 
   return (
     <div className={styles.container}>
       <Layout>
-        <main className={styles.main}>
+      <main className={styles.main}>
           <section className={styles.map}>
             <div className={styles.mapContainer}>
               <MapComponent onExpand={() => setIsMapModalOpen(true)} />
@@ -40,35 +63,61 @@ export default function Home() {
           </section>
 
           <section className={styles.fixedArticles}>
-            <h2>固定記事</h2>
+            <h2 id="fixed-articles">固定記事</h2>
             <div className={styles.fixedArticlesGrid}>
               <div className={styles.fixedArticleCard}>
                 <div className={styles.fixedArticleImage}>
                   <Link href="/article">
-                    <Image
+        <Image
                       src="/nextjs.png"
                       alt="reactをnextjsでデプロイする"
                       width={300}
                       height={200}
-                    />
+        />
+                  </Link>
+                </div>
+                <p>reactをnextjsでデプロイする</p>
+              </div>
+              <div className={styles.fixedArticleCard}>
+                <div className={styles.fixedArticleImage}>
+                  <Link href="/article">
+            <Image
+                      src="/nextjs.png"
+                      alt="reactをnextjsでデプロイする"
+                      width={300}
+                      height={200}
+            />
+                  </Link>
+                </div>
+                <p>reactをnextjsでデプロイする</p>
+        </div>
+              <div className={styles.fixedArticleCard}>
+                <div className={styles.fixedArticleImage}>
+                  <Link href="/article">
+          <Image
+                      src="/nextjs.png"
+                      alt="reactをnextjsでデプロイする"
+                      width={300}
+                      height={200}
+          />
                   </Link>
                 </div>
                 <p>reactをnextjsでデプロイする</p>
               </div>
               {/* <div className={styles.fixedArticleCard}>
                 <div className={styles.fixedArticleImage}>
-                  <Image
+          <Image
                     src="/map-placeholder.jpg"
                     alt="地図の例"
                     width={300}
                     height={200}
-                  />
+          />
                 </div>
                 <p>地図データの更新：最新の地理情報に対応</p>
               </div>
               <div className={styles.fixedArticleCard}>
                 <div className={styles.fixedArticleImage}>
-                  <Image
+          <Image
                     src="/map-placeholder.jpg"
                     alt="地図の例"
                     width={300}

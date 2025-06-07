@@ -2,14 +2,14 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding-top: 56px;
-  background-color: var(--background-dark);
+  padding-top: 0px;
+  background-color: var(--background-color2);
   color: var(--text-primary);
 }
 
 .header {
   background-color: rgba(26, 26, 26, 0.95);
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 5px solid var(-white);
   position: fixed;
   top: 0;
   left: 0;
@@ -23,7 +23,7 @@
 }
 
 .headerContent {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 0 1rem;
   display: flex;
@@ -39,9 +39,12 @@
 }
 
 .logo h1 {
-  font-size: 1.5rem;
   font-weight: bold;
   color: var(--text-primary);
+  font-family: 'ヒラギノ角ゴ ProN','Noto Sans JP', sans-serif;
+  font-size: 10px !important;
+  writing-mode: vertical-rl;
+  -ms-writing-mode: tb-rl;
 }
 
 .nav {
@@ -108,13 +111,21 @@
 
 .main {
   flex: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
+  max-width: 100vw;
+  position: relative;
+  padding: 0;
+  background-color: var(--background-color2);
 }
 
 .fixedArticles {
-  margin-bottom: 3rem;
+  margin-bottom: 0;
+  margin-left: 2em;
+  margin-right: 2em;
+  background-color: var(--background-color2);
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .fixedArticles h2 {
@@ -154,12 +165,18 @@
 }
 
 .fixedArticleCard p {
+  /* margin-top: -0.5rem; */
   padding: 1rem;
   font-size: 0.9rem;
   color: var(--text-secondary);
 }
 
 .contentGrid {
+  margin-left: 2em;
+  margin-right: 2em;
+  background-color: var(--background-color2);
+  height: calc(100vh - 300px - 2em);
+  min-height: 300px;
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
@@ -169,6 +186,7 @@
 .serviceSection h2 {
   font-size: 1.2rem;
   color: var(--text-primary);
+  margin-top: 1.5em;
   margin-bottom: 1.5rem;
 }
 
@@ -255,7 +273,7 @@
 }
 
 .footerContent {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
   display: flex;
   gap: 4rem;
@@ -302,7 +320,7 @@
 }
 
 .footerBottom {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 2rem auto 0;
   padding-top: 2rem;
   border-top: 1px solid var(--border-color);
@@ -312,12 +330,15 @@
 }
 
 .map {
-  margin-bottom: 3rem;
-  background: #fff;
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
-  overflow: hidden;
   position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 0;
+  margin: 0;
+  background: var(--background-color2);
+  border: none;
+  border-radius: 0;
+  overflow: visible;
 }
 
 .map h2 {
@@ -327,10 +348,16 @@
 }
 
 .mapContainer {
-  height: 500px;
-  width: 100%;
-  position: relative;
+  position: absolute;
+  top: 2em;
+  bottom: 2em;
+  left: 2em;
+  right: 2em;
   z-index: 1;
+  background: var(--background-color2);
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .expandButton {
