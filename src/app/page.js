@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import dynamic from "next/dynamic";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Layout from '../components/Layout';
 import Link from 'next/link';
 
@@ -30,6 +30,8 @@ export default function Home() {
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
   const [visible, setVisible] = useState(false);
   const [map, setMap] = useState(null);
+  const mapRef = useRef(null);
+  const articlesRef = useRef(null);
 
   useEffect(() => {
     if (!visible) return;
@@ -52,20 +54,74 @@ export default function Home() {
     };
   }, [visible, map]);
 
+  // スクロール吸着ロジック
+  useEffect(() => {
+    let ticking = false;
+    // PC: wheel
+    const handleWheel = (e) => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const mapTop = mapRef.current?.getBoundingClientRect().top + window.scrollY;
+        const articlesTop = articlesRef.current?.getBoundingClientRect().top + window.scrollY;
+        const scrollY = window.scrollY;
+        const direction = e.deltaY > 0 ? 'down' : 'up';
+        // 下方向: 地図→記事一覧
+        if (direction === 'down' && scrollY < articlesTop - 50 && scrollY < mapTop + 100) {
+          window.scrollTo({ top: articlesTop - 20, behavior: 'smooth' });
+        }
+        // 上方向: 記事一覧→地図
+        if (direction === 'up' && scrollY > mapTop + 50 && scrollY > articlesTop - 100) {
+          window.scrollTo({ top: mapTop, behavior: 'smooth' });
+        }
+        ticking = false;
+      });
+    };
+    // スマホ: touchend
+    let touchStartY = 0;
+    const handleTouchStart = (e) => {
+      if (e.touches && e.touches.length > 0) {
+        touchStartY = e.touches[0].clientY;
+      }
+    };
+    const handleTouchEnd = (e) => {
+      const mapRect = mapRef.current?.getBoundingClientRect();
+      const articlesRect = articlesRef.current?.getBoundingClientRect();
+      if (!mapRect || !articlesRect) return;
+      const vh = window.innerHeight;
+      // 地図が画面の半分以上上に消えたら記事一覧に吸着
+      if (mapRect.bottom < vh / 2) {
+        window.scrollTo({ top: window.scrollY + articlesRect.top - 20, behavior: 'smooth' });
+      }
+      // 記事一覧が画面の半分以上下に消えたら地図に吸着
+      else if (articlesRect.top > vh / 2) {
+        window.scrollTo({ top: window.scrollY + mapRect.top, behavior: 'smooth' });
+      }
+    };
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, []);
+
   return (
     <div className={styles.container}>
       <Layout>
       <main className={styles.main}>
-          <section className={styles.map}>
+          <section className={styles.map} ref={mapRef}>
             <div className={styles.mapContainer}>
               <MapComponent onExpand={() => setIsMapModalOpen(true)} />
             </div>
           </section>
 
-          <section className={styles.fixedArticles}>
+          <section className={styles.fixedArticles} ref={articlesRef}>
             <h2 id="fixed-articles">固定記事</h2>
             <div className={styles.fixedArticlesGrid}>
-              <Link href="/article" className={styles.fixedArticleCard}>
+              <Link href="/article1" className={styles.fixedArticleCard}>
                 <div className={styles.fixedArticleImage}>
                   <Image
                     src="/nextjs.png"
@@ -76,18 +132,18 @@ export default function Home() {
                 </div>
                 <p>reactをnextjsでデプロイする</p>
               </Link>
-              <Link href="/article" className={styles.fixedArticleCard}>
+              <Link href="/article2" className={styles.fixedArticleCard}>
                 <div className={styles.fixedArticleImage}>
                   <Image
                     src="/leaflet.png"
-                    alt="reactをnextjsでデプロイする"
+                    alt="reactでleafletを使ってみる"
                     width={300}
                     height={200}
                   />
                 </div>
                 <p>reactでleafletを使ってみる</p>
               </Link>
-              <Link href="/article" className={styles.fixedArticleCard}>
+              <Link href="/article3" className={styles.fixedArticleCard}>
                 <div className={styles.fixedArticleImage}>
                   <Image
                     src="/12-13.png"
@@ -120,6 +176,11 @@ export default function Home() {
                 </div>
                 <p>パフォーマンス改善：描画速度が50%向上</p>
               </div> */}
+            </div>
+            <div style={{ textAlign: 'right', marginTop: '1rem' }}>
+              <Link href="/article" className={styles.moreLink}>
+                記事一覧を見る →
+              </Link>
             </div>
           </section>
 
