@@ -183,12 +183,16 @@
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
 }
-
-.newsSection h2,
 .serviceSection h2 {
   font-size: 1.2rem;
   color: var(--text-primary);
-  margin-top: 1.5em;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+.newsSection h2 {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin-top: 0;
   margin-bottom: 1.5rem;
 }
 

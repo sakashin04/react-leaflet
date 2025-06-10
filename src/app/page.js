@@ -184,6 +184,8 @@ export default function Home() {
             </div>
           </section>
 
+
+
           <div className={styles.contentGrid}>
             <section className={styles.newsSection}>
               <h2>新着・更新</h2>
@@ -208,7 +210,7 @@ export default function Home() {
             </section>
 
             <section className={styles.serviceSection}>
-              <h2>サービス<br />（全て作成予定で何も着手していません）</h2>
+              <h2>サービス（全て未着手）</h2>
               <div className={styles.serviceGrid}>
                 <a href="#" className={styles.serviceCard}>
                   <h3>マップエディタ</h3>

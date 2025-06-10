@@ -33,7 +33,7 @@ export default function Footer() {
         </div> */}
       </div>
       <div className={styles.footerBottom}>
-        <p>&copy; 2025 NW係 All rights reserved.</p>
+        {/* <p>&copy; 2025 NW係 All rights reserved.</p> */}
       </div>
     </footer>
   );

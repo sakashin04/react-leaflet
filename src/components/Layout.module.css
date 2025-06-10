@@ -73,7 +73,7 @@
   transition: color 0.2s;
   padding: 0.5rem 0.5rem;
   font-family: 'Shippori Mincho', serif;
-  writing-mode: vertical-rl;
+  writing-mode: vertical-lr;
   border-radius: 4px;
   text-align: center;
 }

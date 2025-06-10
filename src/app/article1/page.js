@@ -111,7 +111,7 @@ cd my-app`}</CodeBlock>
                 </ol>
               </GlassPanel>
               <img src="/1-2.png" alt="vercelのデプロイ" width="100%" style={{display: 'block', margin: '0 auto'}} />
-              <h3>参考</h3>
+              <h2 id="reference">参考</h2>
               <p><a href="https://zenn.dev/keitakn/articles/nextjs-vercel-create-staging" target="_blank" rel="noopener noreferrer">Next.js + Vercelでステージング環境を構築</a></p>
               <p><a href="https://www.youtube.com/watch?v=15WLMqnkPsE&list=PLwM1-TnN_NN6fUhOoZyU4iZiwhLyISopO" target="_blank" rel="noopener noreferrer">しまぶーのIT大学　Nextjsで学ぶReact講座（Youtube）</a><small>（正直これを見れば大体分かると思います）</small></p>
             </div>
