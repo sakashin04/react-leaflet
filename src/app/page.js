@@ -65,45 +65,39 @@ export default function Home() {
           <section className={styles.fixedArticles}>
             <h2 id="fixed-articles">固定記事</h2>
             <div className={styles.fixedArticlesGrid}>
-              <div className={styles.fixedArticleCard}>
+              <Link href="/article" className={styles.fixedArticleCard}>
                 <div className={styles.fixedArticleImage}>
-                  <Link href="/article">
-        <Image
-                      src="/nextjs.png"
-                      alt="reactをnextjsでデプロイする"
-                      width={300}
-                      height={200}
-        />
-                  </Link>
+                  <Image
+                    src="/nextjs.png"
+                    alt="reactをnextjsでデプロイする"
+                    width={300}
+                    height={200}
+                  />
                 </div>
                 <p>reactをnextjsでデプロイする</p>
-              </div>
-              <div className={styles.fixedArticleCard}>
+              </Link>
+              <Link href="/article" className={styles.fixedArticleCard}>
                 <div className={styles.fixedArticleImage}>
-                  <Link href="/article">
-            <Image
-                      src="/nextjs.png"
-                      alt="reactをnextjsでデプロイする"
-                      width={300}
-                      height={200}
-            />
-                  </Link>
+                  <Image
+                    src="/leaflet.png"
+                    alt="reactをnextjsでデプロイする"
+                    width={300}
+                    height={200}
+                  />
                 </div>
-                <p>reactをnextjsでデプロイする</p>
-        </div>
-              <div className={styles.fixedArticleCard}>
+                <p>reactでleafletを使ってみる</p>
+              </Link>
+              <Link href="/article" className={styles.fixedArticleCard}>
                 <div className={styles.fixedArticleImage}>
-                  <Link href="/article">
-          <Image
-                      src="/nextjs.png"
-                      alt="reactをnextjsでデプロイする"
-                      width={300}
-                      height={200}
-          />
-                  </Link>
+                  <Image
+                    src="/12-13.png"
+                    alt="画面中心の経緯度から平面直角座標系への変換"
+                    width={300}
+                    height={200}
+                  />
                 </div>
-                <p>reactをnextjsでデプロイする</p>
-              </div>
+                <p>画面中心の経緯度から平面直角座標系への変換をしてみる</p>
+              </Link>
               {/* <div className={styles.fixedArticleCard}>
                 <div className={styles.fixedArticleImage}>
           <Image

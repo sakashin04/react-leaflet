@@ -1,0 +1,18 @@
+.glassPanel {
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 1em 1em;
+  margin: 1em 0;
+  color: var(--text-third);
+  font-size: 0.8em;
+  line-height: 1.7;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+.glassPanel ol {
+  padding: 1em;
+  margin: 0;
+} 

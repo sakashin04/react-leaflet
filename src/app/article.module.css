@@ -54,10 +54,11 @@
   font-size: 1.5rem;
   margin: 2rem 0 1rem;
   color: var(--text-primary);
+  border-bottom: 1px solid var(--white);
 }
 
 .content p {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
   color: var(--text-secondary);
 }
 
@@ -110,7 +111,12 @@
 }
 
 .tocList a:hover {
-  color: var(--);
+  color: var(--text-primary);
+  background: #5cb6e6;
+  box-shadow: 0 0 12px 4px #5cb6e6, 0 0 24px 8px #5cb6e6;
+  border-radius: 24px;
+  text-shadow: 0 0 6px #5cb6e6, 0 0 2px #5cb6e6;
+  transition: background 0.2s, box-shadow 0.2s, color 0.2s;
 }
 
 .articleLayout {
@@ -195,9 +201,12 @@
 }
 
 .tocList a:hover {
-  color: var(--white);
-  background-color: var(--accent-neon-blue);
-  padding: 0.4rem 0rem;
+  color: var(--text-primary);
+  background: #3f5d7c;
+  box-shadow: 0 0 12px 4px #3f5d7c, 0 0 24px 8px #3f5d7c;
+  border-radius: 24px;
+  text-shadow: 0 0 6px #3f5d7c, 0 0 2px #3f5d7c;
+  transition: background 0.2s, box-shadow 0.2s, color 0.2s;
 }
 
 @media (max-width: 900px) {
@@ -207,4 +216,30 @@
   .articleMain {
     padding-right: 0;
   }
+}
+
+@media (max-width: 1200px) {
+  .tocSidebar {
+    display: none;
+  }
+  .articleMain {
+    padding-right: 0;
+  }
+  .articleLayout {
+    padding-right: 0;
+  }
+}
+
+.highlight-third {
+  background: linear-gradient(0deg, var(--text-third) 100%, transparent 30%);
+  display: inline;
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+.content h3 {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: ...;
+  /* 他のスタイル */
 } 

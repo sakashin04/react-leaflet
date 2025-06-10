@@ -1,0 +1,76 @@
+.codeBlockWrapper {
+  position: relative;
+  margin: 1.5em 0;
+  background: #23272e;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  overflow: auto;
+}
+
+.codeBlock {
+  background: #23272e;
+  color: #e6e6e6;
+  font-family: 'Fira Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
+  font-size: 15px;
+  padding: 1.2em 1.5em 1.2em 1.5em;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 0;
+}
+
+.copyButton {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  background: #23272e;
+  color: #7ee0ff;
+  border: none;
+  font-size: 1.1em;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 0.2em 0.6em;
+  transition: background 0.2s, color 0.2s;
+  z-index: 2;
+}
+.copyButton:hover {
+  background: #2d323c;
+  color: #fff;
+}
+
+/* 簡易シンタックスハイライト例 */
+.codeBlock .token.comment,
+.codeBlock .token.prolog,
+.codeBlock .token.doctype,
+.codeBlock .token.cdata {
+  color: #6a9955;
+}
+.codeBlock .token.punctuation {
+  color: #d4d4d4;
+}
+.codeBlock .token.property,
+.codeBlock .token.tag,
+.codeBlock .token.constant,
+.codeBlock .token.symbol {
+  color: #569cd6;
+}
+.codeBlock .token.selector,
+.codeBlock .token.attr-name,
+.codeBlock .token.string,
+.codeBlock .token.char,
+.codeBlock .token.builtin,
+.codeBlock .token.inserted {
+  color: #ce9178;
+}
+.codeBlock .token.number,
+.codeBlock .token.boolean,
+.codeBlock .token.variable,
+.codeBlock .token.deleted {
+  color: #b5cea8;
+}
+.codeBlock .token.keyword,
+.codeBlock .token.operator {
+  color: #c586c0;
+}
+.codeBlock .token.function {
+  color: #dcdcaa;
+} 
