@@ -185,6 +185,44 @@
 }
 
 @media (max-width: 768px) {
+  .container {
+    margin-left: 0;
+    padding: 0;
+  }
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 56px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 1000;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 1rem;
+    background-color: var(--background-color);
+  }
+  .headerContent {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+  }
+  .logo {
+    height: 100%;
+    width: auto;
+    margin-right: 1rem;
+  }
+  .logo h1 {
+    writing-mode: horizontal-tb;
+    font-size: 1.5rem !important;
+    margin: 0;
+  }
   .nav {
     display: none;
   }

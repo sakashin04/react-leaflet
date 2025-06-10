@@ -446,6 +446,22 @@
   .footerLinks {
     grid-template-columns: 1fr;
   }
+  
+  .main {
+    padding-top: 56px;
+  }
+  .mapContainer {
+    height: calc(100vh - 56px - 10vh) !important;
+    min-height: calc(100vh - 56px - 10vh) !important;
+    max-height: calc(100vh - 56px - 10vh) !important;
+    margin-top: 0px;
+  }
+  .map,
+  .fixedArticles,
+  .contentGrid {
+    padding-top: 0;
+    margin-top: 0;
+  }
 }
 
 .active {
