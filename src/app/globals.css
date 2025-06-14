@@ -189,6 +189,9 @@ button {
   width: 100%;
   height: 100%;
   background: transparent !important;
+  touch-action: pan-x pan-y;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
 }
 
 .leaflet-container img.leaflet-tile {
@@ -197,6 +200,9 @@ button {
 
 .leaflet-tile-pane {
   background: transparent !important;
+  touch-action: pan-x pan-y;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
 }
 
 .leaflet-tile-pane img.leaflet-tile[src*="std"] {
