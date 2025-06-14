@@ -57,6 +57,7 @@ export default function Home() {
   // スクロール吸着ロジック
   useEffect(() => {
     let ticking = false;
+    let isMapTouched = false; // 地図タッチ中フラグ
     // PC: wheel
     const handleWheel = (e) => {
       if (ticking) return;
@@ -82,9 +83,21 @@ export default function Home() {
     const handleTouchStart = (e) => {
       if (e.touches && e.touches.length > 0) {
         touchStartY = e.touches[0].clientY;
+        // 地図内でのタッチかチェック
+        const mapContainer = mapRef.current?.querySelector('.mapContainer, [class*="mapWrapper"]');
+        if (mapContainer && mapContainer.contains(e.target)) {
+          isMapTouched = true;
+        } else {
+          isMapTouched = false;
+        }
       }
     };
     const handleTouchEnd = (e) => {
+      // 地図内でのタッチの場合はスクロール吸着を無効
+      if (isMapTouched) {
+        isMapTouched = false;
+        return;
+      }
       const mapRect = mapRef.current?.getBoundingClientRect();
       const articlesRect = articlesRef.current?.getBoundingClientRect();
       if (!mapRect || !articlesRect) return;

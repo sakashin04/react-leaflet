@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { MapContainer, TileLayer, useMap, useMapEvents, ScaleControl } from 'react-leaflet';
 import styles from './MapComponent.module.css';
 import 'leaflet/dist/leaflet.css';
@@ -256,18 +256,22 @@ function getSystemNumber(prefecture, city, detail) {
   return systemNumber;
 }
 
-function CoordinatePanel({ center, zoom, municipalities }) {
+function CoordinatePanel({ center, zoom, municipalities, panelRef }) {
   const [info, setInfo] = useState({
     address: '-',
     system: '-',
     x: '-',
     y: '-',
+    elevation: '-',
+    hsrc: '-',
   });
   useEffect(() => {
     async function fetchInfo() {
       try {
+        // 逆ジオコーダー
         const res = await fetch(`https://mreversegeocoder.gsi.go.jp/reverse-geocoder/LonLatToAddress?lat=${center.lat}&lon=${center.lng}`);
         const data = await res.json();
+        console.log('Reverse Geocoder:', data);
         const muniCd = data.results?.muniCd;
         let normalizedMuniCd = muniCd?.length === 4 ? '0' + muniCd : muniCd;
         const city = municipalities[normalizedMuniCd] || '';
@@ -286,19 +290,31 @@ function CoordinatePanel({ center, zoom, municipalities }) {
           y = yVal.toFixed(2);
           system = `${systemNumber}系`;
         }
-        setInfo({ address, system, x, y });
+        // 標高API
+        let elevation = '-', hsrc = '-';
+        try {
+          const elevRes = await fetch(`https://cyberjapandata2.gsi.go.jp/general/dem/scripts/getelevation.php?lon=${center.lng}&lat=${center.lat}&outtype=JSON`);
+          const elevData = await elevRes.json();
+          elevation = elevData.elevation !== undefined ? elevData.elevation : '-';
+          hsrc = elevData.hsrc !== undefined ? elevData.hsrc : '-';
+          console.log('Elevation API:', elevData);
+        } catch (e) {
+          console.log('Elevation API error:', e);
+        }
+        setInfo({ address, system, x, y, elevation, hsrc });
       } catch {
-        setInfo({ address: '-', system: '-', x: '-', y: '-' });
+        setInfo({ address: '-', system: '-', x: '-', y: '-', elevation: '-', hsrc: '-' });
       }
     }
     fetchInfo();
   }, [center, municipalities]);
   return (
-    <div className={styles.coordinatePanel}>
+    <div className={styles.coordinatePanel} ref={panelRef}>
       <div>ZL: {zoom}</div>
       <div>緯度: {center.lat.toFixed(6)}</div>
       <div>経度: {center.lng.toFixed(6)}</div>
       <div>住所: {info.address}</div>
+      <div>標高: {info.elevation} m {info.hsrc !== '-' && <span style={{fontSize:'0.9em',color:'#888'}}>（{info.hsrc}）</span>}</div>
       <div>平面直角座標系: {info.system}</div>
       <div>X: {info.x}</div>
       <div>Y: {info.y}</div>
@@ -341,6 +357,8 @@ export default function MapComponent({ onExpand, isExpanded = false }) {
   const [center, setCenter] = useState({ lat: 35.6895, lng: 139.6917 });
   const [zoom, setZoom] = useState(13);
   const [municipalities, setMunicipalities] = useState({});
+  const panelRef = useRef(null);
+  const [panelBottom, setPanelBottom] = useState(0);
 
   useEffect(() => {
     setIsMounted(true);
@@ -364,6 +382,18 @@ export default function MapComponent({ onExpand, isExpanded = false }) {
     fetch('/municipalities.json').then(r => r.json()).then(setMunicipalities);
   }, []);
 
+  useLayoutEffect(() => {
+    function updatePanelBottom() {
+      if (panelRef.current) {
+        const rect = panelRef.current.getBoundingClientRect();
+        setPanelBottom(rect.height + 20);
+      }
+    }
+    updatePanelBottom();
+    window.addEventListener('resize', updatePanelBottom);
+    return () => window.removeEventListener('resize', updatePanelBottom);
+  }, [center, zoom, municipalities]);
+
   if (!isMounted) {
     return (
       <div className={styles.mapWrapper}>
@@ -381,6 +411,7 @@ export default function MapComponent({ onExpand, isExpanded = false }) {
         zoom={zoom}
         style={{ height: '100%', width: '100%' }}
         zoomControl={true}
+        wheelPxPerZoomLevel={120}
       >
         <TileLayer
           attribution='&copy; <a href="https://maps.gsi.go.jp/development/ichiran.html">国土地理院</a>'
@@ -397,12 +428,21 @@ export default function MapComponent({ onExpand, isExpanded = false }) {
         <ScaleControl position="bottomleft" metric={true} imperial={false} />
         <Crosshair />
       </MapContainer>
-      <CoordinatePanel center={center} zoom={zoom} municipalities={municipalities} />
+      <CoordinatePanel center={center} zoom={zoom} municipalities={municipalities} panelRef={panelRef} />
       <button
         className={styles.shadingButton}
         onClick={() => setShowShading(s => !s)}
         aria-pressed={showShading}
-        style={{ position: 'absolute', bottom: '1rem', right: '1rem', zIndex: 1001 }}
+        style={{
+          position: 'absolute',
+          right: window.innerWidth <= 768 ? 5 : 10,
+          top: panelBottom,
+          width: window.innerWidth <= 768 ? 'auto' : 200,
+          minWidth: window.innerWidth <= 768 ? 150 : undefined,
+          maxWidth: window.innerWidth <= 768 ? 'calc(100vw - 40px)' : undefined,
+          zIndex: 1001,
+          display: panelBottom === 0 ? 'none' : undefined
+        }}
       >
         {showShading ? '陰影起伏図を非表示' : '陰影起伏図を合成'}
       </button>
