@@ -1,5 +1,6 @@
 .container {
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   padding-top: 0px;
@@ -339,6 +340,7 @@
   position: relative;
   width: 100%;
   height: 100vh;
+  height: 100svh;
   min-height: 0;
   margin: 0;
   background: var(--background-color2);
@@ -456,8 +458,11 @@
   }
   .mapContainer {
     height: calc(100vh - 56px - 10vh) !important;
+    height: calc(100svh - 56px - 10vh) !important;
     min-height: calc(100vh - 56px - 10vh) !important;
+    min-height: calc(100svh - 56px - 10vh) !important;
     max-height: calc(100vh - 56px - 10vh) !important;
+    max-height: calc(100svh - 56px - 10vh) !important;
     margin-top: 0px;
   }
   .map,
