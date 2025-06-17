@@ -3,33 +3,32 @@
 import Layout from '../../components/Layout';
 import styles from '../article.module.css';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GlassPanel from '../../components/GlassPanel';
+import { getAllArticles } from '../../lib/getArticles';
 
 export default function ArticleList() {
-  const articles = [
-    {
-      id: 1,
-      title: 'ReactをNext.jsでデプロイする',
-      subtitle: 'vscodeのターミナルからgithubにpushとvercelにデプロイが同時に',
-      date: '6月3日',
-      tags: ['react', 'nextjs']
-    },
-    {
-      id: 2, 
-      title: 'ReactでLeafletを使ってみる',
-      subtitle: 'Reactアプリで地図表示を実装する方法',
-      date: '6月4日',
-      tags: ['leaflet', '地図']
-    },
-    {
-      id: 3,
-      title: '画面中心の経緯度から平面直角座標系への変換',
-      subtitle: '地図アプリでよく使う座標変換の基礎',
-      date: '6月5日', 
-      tags: ['座標', '地図']
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // 記事データを動的に取得
+  useEffect(() => {
+    async function fetchArticles() {
+      try {
+        setLoading(true);
+        const articlesData = await getAllArticles();
+        setArticles(articlesData);
+      } catch (err) {
+        console.error('記事データの取得に失敗しました:', err);
+        setError('記事データの取得に失敗しました');
+      } finally {
+        setLoading(false);
+      }
     }
-  ];
+
+    fetchArticles();
+  }, []);
 
   // タグ一覧をユニークで抽出
   const allTags = Array.from(new Set(articles.flatMap(a => a.tags)));
@@ -39,6 +38,38 @@ export default function ArticleList() {
   const filteredArticles = selectedTag
     ? articles.filter(article => article.tags.includes(selectedTag))
     : articles;
+
+  // ローディング状態の表示
+  if (loading) {
+    return (
+      <Layout>
+        <div className={styles.articleLayout}>
+          <main className={styles.articleMain}>
+            <h1 className={styles.title}>記事一覧</h1>
+            <div className={styles.content}>
+              <p>記事データを読み込み中...</p>
+            </div>
+          </main>
+        </div>
+      </Layout>
+    );
+  }
+
+  // エラー状態の表示
+  if (error) {
+    return (
+      <Layout>
+        <div className={styles.articleLayout}>
+          <main className={styles.articleMain}>
+            <h1 className={styles.title}>記事一覧</h1>
+            <div className={styles.content}>
+              <p style={{ color: 'red' }}>{error}</p>
+            </div>
+          </main>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

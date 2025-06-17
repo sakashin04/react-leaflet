@@ -167,28 +167,17 @@ export default function Home() {
                 </div>
                 <p>画面中心の経緯度から平面直角座標系への変換をしてみる</p>
               </Link>
-              {/* <div className={styles.fixedArticleCard}>
+              <Link href="/article4" className={styles.fixedArticleCard}>
                 <div className={styles.fixedArticleImage}>
-          <Image
-                    src="/map-placeholder.jpg"
-                    alt="地図の例"
-                    width={300}
-                    height={200}
-          />
-                </div>
-                <p>地図データの更新：最新の地理情報に対応</p>
-              </div>
-              <div className={styles.fixedArticleCard}>
-                <div className={styles.fixedArticleImage}>
-          <Image
-                    src="/map-placeholder.jpg"
-                    alt="地図の例"
+                  <Image
+                    src="/nextjs.png"
+                    alt="部品紹介"
                     width={300}
                     height={200}
                   />
                 </div>
-                <p>パフォーマンス改善：描画速度が50%向上</p>
-              </div> */}
+                <p>Reactコンポーネントの基本的な部品について学ぼう</p>
+              </Link>
             </div>
             <div style={{ textAlign: 'right', marginTop: '1rem' }}>
               <Link href="/article" className={styles.moreLink}>
