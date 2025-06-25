@@ -265,13 +265,14 @@ function CoordinatePanel({ center, zoom, municipalities, panelRef }) {
     elevation: '-',
     hsrc: '-',
   });
+  
   useEffect(() => {
-    async function fetchInfo() {
+    // デバウンス処理を追加して、APIリクエストを制限
+    const timer = setTimeout(async () => {
       try {
         // 逆ジオコーダー
         const res = await fetch(`https://mreversegeocoder.gsi.go.jp/reverse-geocoder/LonLatToAddress?lat=${center.lat}&lon=${center.lng}`);
         const data = await res.json();
-        console.log('Reverse Geocoder:', data);
         const muniCd = data.results?.muniCd;
         let normalizedMuniCd = muniCd?.length === 4 ? '0' + muniCd : muniCd;
         const city = municipalities[normalizedMuniCd] || '';
@@ -297,7 +298,6 @@ function CoordinatePanel({ center, zoom, municipalities, panelRef }) {
           const elevData = await elevRes.json();
           elevation = elevData.elevation !== undefined ? elevData.elevation : '-';
           hsrc = elevData.hsrc !== undefined ? elevData.hsrc : '-';
-          console.log('Elevation API:', elevData);
         } catch (e) {
           console.log('Elevation API error:', e);
         }
@@ -305,8 +305,9 @@ function CoordinatePanel({ center, zoom, municipalities, panelRef }) {
       } catch {
         setInfo({ address: '-', system: '-', x: '-', y: '-', elevation: '-', hsrc: '-' });
       }
-    }
-    fetchInfo();
+    }, 500); // 500msのデバウンス
+
+    return () => clearTimeout(timer);
   }, [center, municipalities]);
   return (
     <div className={styles.coordinatePanel} ref={panelRef}>
@@ -365,17 +366,21 @@ export default function MapComponent({ onExpand, isExpanded = false }) {
   }, []);
 
   useEffect(() => {
-    // 標準地図タイルの親divにz-index:100
-    document.querySelectorAll('.leaflet-layer img[src*="std"]').forEach(img => {
-      if (img.parentElement) img.parentElement.style.zIndex = 100;
-    });
-    // 陰影起伏図タイルのimgにmix-blend-mode, z-index, pointer-eventsを強制適用
-    document.querySelectorAll('.leaflet-layer img[src*="hillshademap"]').forEach(img => {
-      img.style.mixBlendMode = 'multiply';
-      img.style.pointerEvents = 'none';
-      img.style.zIndex = 200;
-      if (img.parentElement) img.parentElement.style.zIndex = 200;
-    });
+    const timer = setTimeout(() => {
+      // 標準地図タイルの親divにz-index:100
+      document.querySelectorAll('.leaflet-layer img[src*="std"]').forEach(img => {
+        if (img.parentElement) img.parentElement.style.zIndex = 100;
+      });
+      // 陰影起伏図タイルのimgにmix-blend-mode, z-index, pointer-eventsを強制適用
+      document.querySelectorAll('.leaflet-layer img[src*="hillshademap"]').forEach(img => {
+        img.style.mixBlendMode = 'multiply';
+        img.style.pointerEvents = 'none';
+        img.style.zIndex = 200;
+        if (img.parentElement) img.parentElement.style.zIndex = 200;
+      });
+    }, 100);
+    
+    return () => clearTimeout(timer);
   }, [showShading]);
 
   useEffect(() => {

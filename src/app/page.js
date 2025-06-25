@@ -192,6 +192,11 @@ export default function Home() {
             <section className={styles.newsSection}>
               <h2>新着・更新</h2>
               <div className={styles.newsList}>
+                <Link href="/article8" className={styles.newsItem}>
+                  <span className={styles.newsDate}>2025年6月25日</span>
+                  <span className={styles.newsTag}>新記事</span>
+                  <span className={styles.newsTitle}>Leaflet地図のパフォーマンス最適化について追加</span>
+                </Link>
                 <a href="#" className={styles.newsItem}>
                   <span className={styles.newsDate}>2025年6月3日</span>
                   <span className={styles.newsTag}>リリース</span>

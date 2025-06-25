@@ -8,7 +8,7 @@ export async function getAllArticles() {
   const articles = [];
   
   // 記事番号のリスト（手動で管理）
-  const articleNumbers = [1, 2, 3, 4, 5, 6, 7];
+  const articleNumbers = [1, 2, 3, 4, 5, 6, 7, 8];
   
   for (const num of articleNumbers) {
     try {
