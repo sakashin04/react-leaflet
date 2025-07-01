@@ -154,18 +154,24 @@ export default function OptimalVectorPage() {
         const protocol = new window.pmtiles.Protocol();
         window.maplibregl.addProtocol('pmtiles', protocol.tile);
 
-        // PMTilesソースを追加
+        // PMTilesソースを追加（より安全な形式）
         mapInstance.current.addSource('gsi-optimal', {
           type: 'vector',
-          url: 'pmtiles://https://cyberjapandata.gsi.go.jp/xyz/optimal_bvmap-v1/optimal_bvmap-v1.pmtiles'
+          tiles: ['pmtiles://https://cyberjapandata.gsi.go.jp/xyz/optimal_bvmap-v1/optimal_bvmap-v1.pmtiles/{z}/{x}/{y}'],
+          minzoom: 4,
+          maxzoom: 16,
+          attribution: '国土地理院最適化ベクトルタイル（試験公開）'
         });
 
         console.log('PMTiles source added');
 
-        // 少し待ってからレイヤーを追加
-        setTimeout(() => {
-          addGSILayers();
-        }, 1000);
+        // ソースデータが読み込まれるのを待つ
+        mapInstance.current.on('sourcedata', (e) => {
+          if (e.sourceId === 'gsi-optimal' && e.isSourceLoaded) {
+            console.log('GSI source loaded, adding layers...');
+            addGSILayers();
+          }
+        });
 
       } catch (error) {
         console.warn('PMTiles setup failed:', error);
@@ -175,46 +181,58 @@ export default function OptimalVectorPage() {
     // GSIレイヤーの追加
     const addGSILayers = () => {
       try {
+        // ソースが存在するかチェック
+        if (!mapInstance.current.getSource('gsi-optimal')) {
+          console.warn('GSI source not available');
+          return;
+        }
+
         // 水域レイヤー
-        mapInstance.current.addLayer({
-          id: 'gsi-water',
-          type: 'fill',
-          source: 'gsi-optimal',
-          'source-layer': 'WA',
-          layout: { 'visibility': 'none' },
-          paint: {
-            'fill-color': '#a6cee3',
-            'fill-opacity': 0.6
-          }
-        });
+        if (!mapInstance.current.getLayer('gsi-water')) {
+          mapInstance.current.addLayer({
+            id: 'gsi-water',
+            type: 'fill',
+            source: 'gsi-optimal',
+            'source-layer': 'WA',
+            layout: { 'visibility': 'none' },
+            paint: {
+              'fill-color': '#a6cee3',
+              'fill-opacity': 0.6
+            }
+          });
+        }
 
         // 道路レイヤー
-        mapInstance.current.addLayer({
-          id: 'gsi-roads',
-          type: 'line',
-          source: 'gsi-optimal',
-          'source-layer': 'Rd',
-          layout: { 'visibility': 'none' },
-          paint: {
-            'line-color': '#d62728',
-            'line-width': 2
-          }
-        });
+        if (!mapInstance.current.getLayer('gsi-roads')) {
+          mapInstance.current.addLayer({
+            id: 'gsi-roads',
+            type: 'line',
+            source: 'gsi-optimal',
+            'source-layer': 'Rd',
+            layout: { 'visibility': 'none' },
+            paint: {
+              'line-color': '#d62728',
+              'line-width': 2
+            }
+          });
+        }
 
         // 建物レイヤー
-        mapInstance.current.addLayer({
-          id: 'gsi-buildings',
-          type: 'fill',
-          source: 'gsi-optimal',
-          'source-layer': 'BldA',
-          minzoom: 14,
-          layout: { 'visibility': 'none' },
-          paint: {
-            'fill-color': '#ff7f0e',
-            'fill-opacity': 0.7,
-            'fill-outline-color': '#d62728'
-          }
-        });
+        if (!mapInstance.current.getLayer('gsi-buildings')) {
+          mapInstance.current.addLayer({
+            id: 'gsi-buildings',
+            type: 'fill',
+            source: 'gsi-optimal',
+            'source-layer': 'BldA',
+            minzoom: 14,
+            layout: { 'visibility': 'none' },
+            paint: {
+              'fill-color': '#ff7f0e',
+              'fill-opacity': 0.7,
+              'fill-outline-color': '#d62728'
+            }
+          });
+        }
 
         console.log('GSI layers added successfully');
       } catch (error) {

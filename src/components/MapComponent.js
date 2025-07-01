@@ -360,9 +360,18 @@ export default function MapComponent({ onExpand, isExpanded = false }) {
   const [municipalities, setMunicipalities] = useState({});
   const panelRef = useRef(null);
   const [panelBottom, setPanelBottom] = useState(0);
+  const mapRef = useRef(null);
 
   useEffect(() => {
-    setIsMounted(true);
+    // DOMが完全に準備されてからマウント状態を設定
+    const timer = setTimeout(() => {
+      // DOM要素が存在するかチェック
+      if (typeof window !== 'undefined' && document.body) {
+        setIsMounted(true);
+      }
+    }, 100);
+    
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -399,7 +408,7 @@ export default function MapComponent({ onExpand, isExpanded = false }) {
     return () => window.removeEventListener('resize', updatePanelBottom);
   }, [center, zoom, municipalities]);
 
-  if (!isMounted) {
+  if (!isMounted || typeof window === 'undefined') {
     return (
       <div className={styles.mapWrapper}>
         <div className={styles.loadingContainer}>
@@ -410,13 +419,17 @@ export default function MapComponent({ onExpand, isExpanded = false }) {
   }
 
   return (
-    <div className={styles.mapWrapper}>
+    <div className={styles.mapWrapper} ref={mapRef}>
       <MapContainer
         center={center}
         zoom={zoom}
         style={{ height: '100%', width: '100%' }}
         zoomControl={true}
         wheelPxPerZoomLevel={120}
+        whenCreated={(mapInstance) => {
+          // MapContainerが作成された時の処理
+          console.log('Map instance created:', mapInstance);
+        }}
       >
         <TileLayer
           attribution='&copy; <a href="https://maps.gsi.go.jp/development/ichiran.html">国土地理院</a>'

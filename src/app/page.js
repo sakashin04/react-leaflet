@@ -26,6 +26,12 @@ const MapComponent = dynamic(
   }
 );
 
+// MapErrorBoundaryを動的にインポート
+const MapErrorBoundary = dynamic(
+  () => import("../components/MapErrorBoundary"),
+  { ssr: false }
+);
+
 export default function Home() {
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -127,7 +133,9 @@ export default function Home() {
       <main className={styles.main}>
           <section className={styles.map} ref={mapRef}>
             <div className={styles.mapContainer}>
-              <MapComponent onExpand={() => setIsMapModalOpen(true)} />
+              <MapErrorBoundary>
+                <MapComponent onExpand={() => setIsMapModalOpen(true)} />
+              </MapErrorBoundary>
             </div>
           </section>
 
@@ -216,19 +224,6 @@ export default function Home() {
               {/* <a href="#" className={styles.moreLink}>一覧を見る</a> */}
             </section>
 
-            <section className={styles.serviceSection}>
-              <h2>サービス（全て未着手）</h2>
-              <div className={styles.serviceGrid}>
-                <a href="#" className={styles.serviceCard}>
-                  <h3>マップエディタ</h3>
-                  <p>オンラインで地図をカスタマイズできるツールです。</p>
-                </a>
-                <a href="#" className={styles.serviceCard}>
-                  <h3>データポータル</h3>
-                  <p>地理データの検索・ダウンロードができます。</p>
-                </a>
-              </div>
-            </section>
           </div>
         </main>
       </Layout>

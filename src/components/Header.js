@@ -16,11 +16,11 @@ export default function Header() {
           </Link>
         </div>
         <nav className={styles.navLinks}>
-          <Link href="/">
-            地図
+          <Link href="/maps">
+            地図一覧
           </Link>
-          <Link href="/#fixed-articles">
-            記事
+          <Link href="/article">
+            記事一覧
           </Link>
           {/* <Link href="/news" className={pathname === '/news' ? styles.active : ''}>
             お知らせ

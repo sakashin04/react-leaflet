@@ -62,7 +62,7 @@ export default function Article8() {
 
             <h2 id="problem-investigation">問題の原因調査</h2>
             <p>
-              <code>ps aux</code>コマンドでプロセスを確認したところ、Next.jsサーバーのCPU使用率が102.9%と異常に高いことが判明しました。
+              <code>ps aux</code>コマンドでプロセスを確認したところ、Next.jsサーバのCPU使用率が102.9%と異常に高いことが判明しました。
             </p>
 
             <CodeBlock language="bash">

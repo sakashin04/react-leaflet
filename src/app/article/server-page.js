@@ -1,6 +1,6 @@
 /**
  * React Server Components版の記事一覧ページ
- * サーバーサイドで記事データを取得してレンダリング
+ * サーバサイドで記事データを取得してレンダリング
  */
 
 import Layout from '../../components/Layout';
@@ -11,7 +11,7 @@ import GlassPanel from '../../components/GlassPanel';
 
 // Server Componentとして実装
 export default async function ServerArticleList() {
-  // サーバーサイドで記事データを取得
+  // サーバサイドで記事データを取得
   const articles = await getAllArticles();
   
   // タグ一覧をユニークで抽出
