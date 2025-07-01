@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  padding: 40px 20px;
+  padding: 20px 20px;
   background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #667eea 100%);
   position: relative;
   overflow: hidden;
@@ -21,7 +21,7 @@
 
 .header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
   position: relative;
   z-index: 1;
 }
@@ -101,7 +101,7 @@
 /* レスポンシブデザイン */
 @media (max-width: 768px) {
   .container {
-    padding: 20px 15px;
+    padding: 10px 15px;
   }
   
   .title {
@@ -142,7 +142,7 @@
   }
   
   .header {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
   
   .grid {

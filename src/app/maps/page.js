@@ -7,6 +7,17 @@ import styles from './maps.module.css';
 // 地図データの定義
 const mapsData = [
   {
+    id: 'toppage-map',
+    title: 'トップページと同じ地図',
+    description: 'React Leafletを使用したベーシックな地図表示。陰影起伏図とのブレンド表示に対応。',
+    thumbnail: '/api/placeholder/400/300',
+    link: '/toppage-map',
+    tileFormat: 'ラスタータイル',
+    zoomRange: '3-18',
+    renderer: 'React Leaflet v4.2.1',
+    dataSource: '国土地理院',
+  },
+  {
     id: 'optimal-vector',
     title: '国土地理院最適化ベクトルタイル',
     description: 'PMTiles形式による高速ベクトルタイル配信システム。MapLibre GL JSを使用。',
@@ -16,17 +27,6 @@ const mapsData = [
     zoomRange: '4-16',
     renderer: 'MapLibre GL JS v2.4.0',
     dataSource: '国土地理院',
-  },
-  {
-    id: '3d-pointcloud',
-    title: '3Dポイントクラウド可視化',
-    description: 'Cesium.jsを使用した3D地理空間データの可視化。インタラクティブな3D環境で地形を探索。',
-    thumbnail: '/api/placeholder/400/300',
-    link: '/3d-pointcloud',
-    tileFormat: '3D Tiles',
-    zoomRange: '全地球対応',
-    renderer: 'Cesium.js v1.110',
-    dataSource: '3D Tiles データセット',
   }
 ];
 
@@ -37,9 +37,6 @@ export default function MapsList() {
       <div className={styles.container}>
         <header className={styles.header}>
           <h1 className={styles.title}>地図一覧</h1>
-          <p className={styles.subtitle}>
-            ウェブ地図テストページ一覧
-          </p>
         </header>
 
         <main className={styles.main}>

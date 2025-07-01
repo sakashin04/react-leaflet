@@ -32,8 +32,8 @@ export default function MapCard({ map, onOpen }) {
           />
           <div className={styles.overlay}>
             <div className={styles.playButton}>
-              <svg width="24" height="15" viewBox="0 0 15 15" fill="currentColor">
-                <path d="M8 5v14l11-7z"/>
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9 6v12l9-6z"/>
               </svg>
             </div>
           </div>

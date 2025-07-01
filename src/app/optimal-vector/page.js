@@ -297,9 +297,9 @@ export default function OptimalVectorPage() {
       <div className={styles.container}>
         <header className={styles.header}>
           <h1 className={styles.title}>国土地理院 最適化ベクトルタイル</h1>
-          <p className={styles.subtitle}>
+          {/* <p className={styles.subtitle}>
             PMTiles形式による高速ベクトルタイル配信デモ
-          </p>
+          </p> */}
         </header>
 
         <div className={styles.mapWrapper}>
